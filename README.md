@@ -3,11 +3,13 @@
 The [suckless terminal (st)](https://st.suckless.org/) with some additional features:
 
 + Compatibility with `Xresources` and `pywal` for dynamic colors.
-+ Default solarized colors otherwize.
++ Default [gruvbox](https://github.com/morhetz/gruvbox) colors otherwise.
 + Transparency/alpha, which is also adjustable from `~/.Xresources`.
-+ Default font is system "mono" at 14pt, meaning the font will match your system font.
++ Default font is system "mono" at 16pt, meaning the font will match your system font.
 + Very useful keybinds including:
 	+ Copy is alt-c, paste is alt-v or alt-p pastes from primary selection
+	+ Alt-l feeds all urls on screen to dmenu, so they user can choose and
+	  follow one (requires xurls and dmenu installed).
 	+ Zoom in/out or increase font size with Alt+Shift+k/j or u/d for larger intervals.
 	+ Hold alt and press either ↑/↓ or the vim keys k/j to move up/down in the terminal.
 	+ Shift+Mouse wheel do the same.
@@ -21,7 +23,7 @@ The following additional bindings were added before I forked this:
 
 + Scroll through history -- Shift+PageUp/PageDown or Shift+Mouse wheel
 + Increase/decrease font size -- Shift+Alt+PageUp/PageDown
-+ Return to default font size -- Shift+Alt+Home
++ Return to default font size -- Alt+Home
 + Paste -- Shift+Insert
 
 ## Installation for newbs
@@ -36,7 +38,10 @@ default build, since it asks `fontconfig` for your system monospace font.  It
 might be obvious, but `libX11` and `libXft` are required as well. Chances are,
 you have all of this installed already.
 
-## How to configure dynamically with Xresrouces
+On OpenBSD, be sure to edit `config.mk` first and remove `-lrt` from the
+`$LIBS` before compiling.
+
+## How to configure dynamically with Xresources
 
 For many key variables, this build of `st` will look for X settings set in
 either `~/.Xdefaults` or `~/.Xresources`. You must run `xrdb` on one of these
@@ -58,7 +63,7 @@ The `alpha` value (for transparency) goes from `0` (transparent) to `255`
 
 To be clear about the color settings:
 
-- This build will use colorized colors by default and as a fallback.
+- This build will use gruvbox colors by default and as a fallback.
 - If there are Xresources colors defined, those will take priority.
 - But if `wal` has run in your session, its colors will take priority.
 
